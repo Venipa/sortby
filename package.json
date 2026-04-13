@@ -1,0 +1,24 @@
+{
+  "name": "fluent-sorter",
+  "version": "1.0.0",
+  "author": {
+    "email": "admin@venipa.net",
+    "name": "Venipa",
+    "url": "https://venipa.net/projects/sortby"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/venipa/sortby"
+  },
+  "bugs": {
+    "url": "https://github.com/venipa/sortby/issues"
+  },
+  "module": "index.ts",
+  "type": "module",
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  }
+}
