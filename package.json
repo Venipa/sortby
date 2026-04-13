@@ -1,6 +1,7 @@
 {
   "name": "fluent-sorter",
-  "version": "1.0.0",
+  "version": "1.0.2",
+  "description": "Lightweight fluent sorting helpers with ESM and CJS support.",
   "author": {
     "email": "admin@venipa.net",
     "name": "Venipa",
@@ -13,10 +14,29 @@
   "bugs": {
     "url": "https://github.com/venipa/sortby/issues"
   },
-  "module": "index.ts",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "type": "module",
   "exports": {
-    ".": "./index.ts"
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "bun run build:esm && bun run build:cjs && bun run build:types",
+    "build:esm": "bun build ./index.ts --outfile ./dist/index.js --format esm --target node",
+    "build:cjs": "bun build ./index.ts --outfile ./dist/index.cjs --format cjs --target node",
+    "build:types": "bunx tsc ./index.ts --declaration --emitDeclarationOnly --outDir ./dist --module ESNext --target ESNext --skipLibCheck",
+    "prepublishOnly": "bun run build"
   },
   "devDependencies": {
     "@types/bun": "latest"
