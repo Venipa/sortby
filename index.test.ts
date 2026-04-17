@@ -85,7 +85,7 @@ describe("sorter and chaining behavior", () => {
 			{ score: 20, name: "Alice" },
 			{ score: 30, name: "Bob" }
 		];
-		const sortedItems = items.toSorted(sorter<ScoredItem>("name").thenBy("score"));
+		const sortedItems = items.toSorted(sorter("name").thenBy("score"));
 		expect(sortedItems).toEqual([
 			{ score: 30, name: "Bob" },
 			{ score: 10, name: "Bob" },
