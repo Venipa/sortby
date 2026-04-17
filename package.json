@@ -1,6 +1,6 @@
 {
   "name": "fluent-sorter",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "Lightweight fluent sorting helpers with ESM and CJS support.",
   "author": {
     "email": "admin@venipa.net",
@@ -21,6 +21,9 @@
       "import": "./dist/index.js",
       "require": "./dist/index.cjs",
       "default": "./dist/index.js"
+    },
+    "./sorter": {
+      "types": "./dist/sorter.d.ts"
     }
   },
   "files": [

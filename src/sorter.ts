@@ -155,16 +155,16 @@ export function thenBy<T, TValue extends ComparableValue>(
 	return createFluentComparator([toComparator(comparatorOrSelector, direction)]);
 }
 
-export default function sorter<T>(comparator: Comparator<T>, direction?: SortDirection): SorterComparator<T>;
-export default function sorter<T, TValue extends ComparableValue>(
+export function sorter<T>(comparator: Comparator<T>, direction?: SortDirection): SorterComparator<T>;
+export function sorter<T, TValue extends ComparableValue>(
 	selector: SortSelector<T, TValue>,
 	direction?: SortDirection
 ): SorterComparator<T>;
-export default function sorter<T>(
+export function sorter<T>(
 	property: ComparablePropertyName<T>,
 	direction?: SortDirection
 ): SorterComparator<T>;
-export default function sorter<T, TValue extends ComparableValue>(
+export function sorter<T, TValue extends ComparableValue>(
 	comparatorOrSelector: Comparator<T> | SortSelector<T, TValue> | ComparablePropertyName<T>,
 	direction: SortDirection = DEFAULT_SORT_DIRECTION
 ): SorterComparator<T> {
