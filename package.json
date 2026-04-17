@@ -1,16 +1,13 @@
 {
   "name": "fluent-sorter",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "description": "Lightweight fluent sorting helpers with ESM and CJS support.",
   "author": {
     "email": "admin@venipa.net",
     "name": "Venipa",
     "url": "https://venipa.net/projects/sortby"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/venipa/sortby"
-  },
+  "repository": "https://github.com/venipa/sortby.git",
   "bugs": {
     "url": "https://github.com/venipa/sortby/issues"
   },
@@ -32,6 +29,7 @@
     "LICENSE"
   ],
   "scripts": {
+    "test": "bun test",
     "build": "bun run build:esm && bun run build:cjs && bun run build:types",
     "build:esm": "bun build ./index.ts --outfile ./dist/index.js --format esm --target node",
     "build:cjs": "bun build ./index.ts --outfile ./dist/index.cjs --format cjs --target node",

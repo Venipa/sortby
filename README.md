@@ -13,49 +13,58 @@ pnpm add fluent-sorter
 ### ESM
 
 ```ts
-import sorter from "fluent-sorter"; // either use default export sorter or thenBy directly
+import sorter from "fluent-sorter";
 
-const someApiResponse = await fetch("https://api.example.com/items").then(res => res.json());
-return someApiResponse.sort(s => s.createdAt, "desc").thenBy(s => s.name, "asc"); // sort by createdAt descending and then by name ascending
+interface Item {
+  name: string;
+  score: number;
+  createdAt: Date;
+}
+
+const items: Item[] = [
+  { name: "Bob", score: 10, createdAt: new Date("2026-01-01") },
+  { name: "Alice", score: 20, createdAt: new Date("2026-01-02") },
+  { name: "Bob", score: 30, createdAt: new Date("2026-01-03") }
+];
+
+const sorted = items.toSorted(
+  sorter<Item>("name").thenBy("score")
+);
+
+// default direction is "desc" for sorter and thenBy:
+// Bob (30), Bob (10), Alice (20)
+console.log(sorted.map((item) => `${item.name} (${item.score})`));
 ```
 
 ```ts
-import sorter from "fluent-sorter"; // either use default export sorter or thenBy directly
+import sorter from "fluent-sorter";
 
-const byScoreThenName = sorter<{ score: number; name: string }>((a, b) => b.score - a.score).thenBy(
+const byScoreThenNameAsc = sorter<{ score: number; name: string }>(
+  (a, b) => a.score - b.score
+).thenBy(
   (value) => value.name,
   "asc"
 );
-
-byScoreThenName({ score: 10, name: "Alice" }, { score: 20, name: "Bob" }); // -1
-byScoreThenName({ score: 20, name: "Bob" }, { score: 10, name: "Alice" }); // 1
-byScoreThenName({ score: 10, name: "Alice" }, { score: 10, name: "Bob" }); // 0
 ```
 
 ```ts
-import { thenBy } from "fluent-sorter"; // either use default export sorter or thenBy directly
+import { thenBy } from "fluent-sorter";
 
-const byScoreThenName = thenBy<{ score: number; name: string }>((value) => value.score, "desc").thenBy(
-  (value) => value.name,
-  "asc"
-);
-
-import { thenBy } from "fluent-sorter"; // either use default export sorter or thenBy directly
-
-const byScoreThenName = thenBy<{ score: number; name: string }>((value) => value.score, "desc").thenBy(
+const byCreatedAtDescThenNameAsc = thenBy<{ createdAt: Date; name: string }>(
+  (value) => value.createdAt
+).thenBy(
   (value) => value.name,
   "asc"
 );
 ```
 
-### CommonJS
+### CommonJS (Node)
 
 ```js
-const { thenBy } = require("fluent-sorter");
-const byScoreThenName = thenBy<{ score: number; name: string }>((value) => value.score, "desc").thenBy(
-  (value) => value.name,
-  "asc"
-);
+const sorter = require("fluent-sorter").default;
+
+const byScoreThenName = sorter((a, b) => a.score - b.score).thenBy((value) => value.name, "asc");
+const sorted = [{ score: 10, name: "Bob" }, { score: 20, name: "Alice" }].sort(byScoreThenName);
 ```
 
 ## Package output
@@ -70,4 +79,10 @@ This package is built with Bun and published with dual-module support:
 
 ```bash
 bun run build
+```
+
+## Test
+
+```bash
+bun test
 ```
