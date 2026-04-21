@@ -1,5 +1,5 @@
 import { describe, expect, test } from "bun:test";
-import sorter, { thenBy } from "./index.ts";
+import { sorter, thenBy } from "./index";
 
 interface ValueBox<TValue> {
 	value: TValue;
